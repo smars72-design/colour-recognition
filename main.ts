@@ -13,18 +13,10 @@ input.onButtonPressed(Button.A, function () {
 let pressCount = 0
 huskylens.initI2c()
 huskylens.forgetLearn()
-huskylens.initMode(protocolAlgorithm.ALGORITHM_COLOR_RECOGNITION)
+huskylens.initMode(protocolAlgorithm.ALGORITHM_OBJECT_RECOGNITION)
 basic.showIcon(IconNames.Yes)
 pressCount = 1
 basic.forever(function () {
     huskylens.request()
-    if (huskylens.isAppear(1, HUSKYLENSResultType_t.HUSKYLENSResultBlock)) {
-        huskylens.writeOSD("RED", 150, 30)
-    } else if (huskylens.isAppear(2, HUSKYLENSResultType_t.HUSKYLENSResultBlock)) {
-        huskylens.writeOSD("GREEN", 150, 30)
-    } else if (huskylens.isAppear(3, HUSKYLENSResultType_t.HUSKYLENSResultBlock)) {
-        huskylens.writeOSD("BLUE", 150, 30)
-    } else {
-        huskylens.clearOSD()
-    }
+    basic.showString("" + (huskylens.readBox_ss(1, Content3.ID)))
 })
